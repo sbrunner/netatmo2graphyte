@@ -1,0 +1,192 @@
+#!/usr/bin/env python3
+
+import datetime
+import json
+import logging
+import os
+import sys
+import time
+
+import graphyte
+import lnetatmo
+import requests
+import unidecode
+
+LOG = logging.getLogger("netatmo2graphyte")
+
+
+def normalise(name):
+    name = name.replace(" ", "_")
+    name = name.replace("(", "_")
+    name = name.replace(")", "_")
+    name = name.replace("__", "_")
+    name = name.strip("_")
+    return unidecode.unidecode(name).lower()
+
+
+def process(state, authorization):
+    delta = int(os.environ.get("DAEMON_PROCESS_END_SECOUNDS", "86400"))
+    graphyte.send("run", 1)
+
+    weatherData = lnetatmo.WeatherStationData(authorization)
+
+    for station in weatherData.stations.values():
+        station_name = station["home_name"]
+        LOG.info("Station '%s'", station_name)
+
+        modules = [station] + station["modules"]
+
+        for module in modules:
+            for data_type in [
+                "wifi_status",
+                "battery_percent",
+                "rf_status",
+                "battery_vp",
+            ]:
+                if data_type in module:
+                    key = f'status.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                    LOG.debug("Key: %s = %s", key, module[data_type])
+                    graphyte.send(key, module[data_type])
+            for data_type in [
+                "last_setup",
+                "last_status_store",
+                "last_upgrade",
+                "last_message",
+                "last_seen",
+                "date_setup",
+            ]:
+                if data_type in module:
+                    key = f'dates.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                    LOG.debug("Key: %s = %s", key, module[data_type])
+                    graphyte.send(key, module[data_type])
+            for data_type in [
+                "firmware",
+            ]:
+                if data_type in module:
+                    key = f'other.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                    LOG.debug("Key: %s = %s", key, module[data_type])
+                    graphyte.send(key, module[data_type])
+
+            if "place" in module:
+                key = f'other.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise("altitude")}'
+                LOG.debug("Key: %s = %s", key, module["place"]["altitude"])
+                graphyte.send(key, module["place"]["altitude"])
+
+            for data_type in module["data_type"]:
+                key = f'data.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                LOG.info("Key %s", key)
+
+                # measures = weatherData.getMeasure(
+                #    device_id=station["_id"],
+                #    scale="max",
+                #    mtype=data_type,
+                #    module_id=module["_id"],
+                #    limit=1,
+                # )
+                # first_point = int(list(measures["body"].keys())[0])
+                # print(datetime.datetime.fromtimestamp(first_point))
+
+                # max = (time.time() - first_point) / 3600
+                # current = 1
+                # while current < max:
+                #     lasts = requests.get(
+                #         "http://100.83.98.73:2002/render",
+                #         params={
+                #             "target": f"timeFunction(netatmo.{key})",
+                #             "from": "-1h",
+                #             "format": "json",
+                #         },
+                #     ).json()
+                #     print(len(lasts))
+                #     print(datetime.datetime.fromtimestamp(lasts[0]["datapoints"][0][1]))
+                #     print(datetime.datetime.fromtimestamp(lasts[0]["datapoints"][-1][1]))
+
+                while True:
+                    LOG.debug(
+                        "Get measure for %s, from %r", key, datetime.datetime.fromtimestamp(state.get(key, 0))
+                    )
+                    measures = weatherData.getMeasure(
+                        device_id=station["_id"],
+                        scale="max",  # max
+                        mtype=data_type,
+                        module_id=module["_id"],
+                        date_begin=state.get(key, 0),
+                    )
+                    if measures is None:
+                        # Netatmo error
+                        LOG.error("Exit on Netatmo error 1")
+                        sys.exit(1)
+                    if not measures["body"]:
+                        # No more data
+                        break
+                    if isinstance(measures["body"], list):
+                        LOG.error("Error: %r", measures["body"][0])
+                        sys.exit(1)
+                    break_ = False
+                    for time_str, values in measures["body"].items():
+                        time_int = int(time_str)
+                        if key in state and state[key] < time_int - int(
+                            os.environ.get("DAEMON_PROCESS_MAX_MISSING_SECOUNDS", str(86400 * 7))
+                        ):
+                            LOG.info(
+                                "Ignore from date: %r, current: %r, diff: %f",
+                                datetime.datetime.fromtimestamp(time_int),
+                                datetime.datetime.fromtimestamp(state[key]),
+                                time_int - state[key],
+                            )
+                            break_ = True
+                            break
+                        for value in values:
+                            # LOG.debug("%r: %s", datetime.datetime.fromtimestamp(time_int), value)
+                            if value is not None:
+                                graphyte.send(
+                                    key,
+                                    value,
+                                    timestamp=time_int,
+                                )
+                        state[key] = time_int
+
+                    LOG.debug("Save state %s: %r", key, datetime.datetime.fromtimestamp(time_int))
+
+                    with open("/etc/netatmo2graphyte/state.json", "w") as config_file:
+                        config_file.write(json.dumps(state))
+                    if break_ or state.get(key, 0) > time.time() - delta:
+                        break
+
+
+def main():
+
+    logging.basicConfig(level=os.environ.get("LOGLEVEL", logging.INFO))
+
+    graphyte.init(os.environ["GRAPHYTE_HOST"], prefix="netatmo", interval=10)
+
+    graphyte.send("start", 1)
+
+    authorization = lnetatmo.ClientAuth(
+        clientId=os.environ["NETATMO_CLIENT_ID"],
+        clientSecret=os.environ["NETATMO_CLIENT_SECRET"],
+        username=os.environ["NETATMO_CLIENT_USERNAME"],
+        password=os.environ["NETATMO_CLIENT_PASSWORD"],
+        scope="read_station",
+    )
+
+    if authorization is None:
+        LOG.error("Exit on Netatmo error 2")
+        sys.exit(1)
+
+    state = {}
+    if os.path.exists("/etc/netatmo2graphyte/state.json"):
+        with open("/etc/netatmo2graphyte/state.json") as config_file:
+            state = json.loads(config_file.read())
+
+    process(state, authorization)
+
+    delay = int(os.environ.get("DAEMON_DELAY_SECONDS", "0"))
+    if delay > 0:
+        while True:
+            time.sleep(delay)
+            process(state, authorization)
+
+
+if __name__ == "__main__":
+    main()

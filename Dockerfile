@@ -1,8 +1,31 @@
-FROM ubuntu
+FROM ubuntu:20.04 AS base
 
-RUN apt-get update
-RUN apt-get install --yes python3-pip
-RUN python3 -m pip install lnetatmo graphyte requests unidecode
+RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install --yes --no-install-recommends python3-pip binutils && \
+    apt-get clean && \
+    rm -r /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements.txt /tmp/
+RUN python3 -m pip install --disable-pip-version-check --no-cache-dir --requirement=/tmp/requirements.txt && \
+    rm --recursive --force /tmp/*
+
+COPY Pipfile.lock ./
+RUN pipenv sync --system --clear && \
+    rm --recursive --force /usr/local/lib/python3.*/dist-packages/tests/ /tmp/* /root/.cache/* && \
+    (strip /usr/local/lib/python3.*/dist-packages/*/*.so || true)
+
+
+FROM base AS checker
+
+RUN \
+    pipenv sync --system --clear --dev && \
+    rm --recursive --force /tmp/* /root/.cache/*
+
+FROM base AS run
+
+RUN python3 -m compileall -q /usr/local/lib/python3.* -x '/pipenv/'
 
 COPY netatmo2graphyte /usr/bin/
 CMD ["netatmo2graphyte"]

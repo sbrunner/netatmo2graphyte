@@ -9,7 +9,6 @@ import time
 
 import graphyte
 import lnetatmo
-import requests
 import unidecode
 
 LOG = logging.getLogger("netatmo2graphyte")
@@ -28,9 +27,9 @@ def process(state, authorization):
     delta = int(os.environ.get("DAEMON_PROCESS_END_SECOUNDS", "86400"))
     graphyte.send("run", 1)
 
-    weatherData = lnetatmo.WeatherStationData(authorization)
+    weather_data = lnetatmo.WeatherStationData(authorization)
 
-    for station in weatherData.stations.values():
+    for station in weather_data.stations.values():
         station_name = station["home_name"]
         LOG.info("Station '%s'", station_name)
 
@@ -44,7 +43,10 @@ def process(state, authorization):
                 "battery_vp",
             ]:
                 if data_type in module:
-                    key = f'status.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                    key = (
+                        f'status.{normalise(station_name)}.{normalise(module["module_name"])}.'
+                        f"{normalise(data_type)}"
+                    )
                     LOG.debug("Key: %s = %s", key, module[data_type])
                     graphyte.send(key, module[data_type])
             for data_type in [
@@ -56,56 +58,43 @@ def process(state, authorization):
                 "date_setup",
             ]:
                 if data_type in module:
-                    key = f'dates.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                    key = (
+                        f'dates.{normalise(station_name)}.{normalise(module["module_name"])}.'
+                        f"{normalise(data_type)}"
+                    )
                     LOG.debug("Key: %s = %s", key, module[data_type])
                     graphyte.send(key, module[data_type])
             for data_type in [
                 "firmware",
             ]:
                 if data_type in module:
-                    key = f'other.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                    key = (
+                        f'other.{normalise(station_name)}.{normalise(module["module_name"])}.'
+                        f"{normalise(data_type)}"
+                    )
                     LOG.debug("Key: %s = %s", key, module[data_type])
                     graphyte.send(key, module[data_type])
 
             if "place" in module:
-                key = f'other.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise("altitude")}'
+                key = (
+                    f'other.{normalise(station_name)}.{normalise(module["module_name"])}.'
+                    f'{normalise("altitude")}'
+                )
                 LOG.debug("Key: %s = %s", key, module["place"]["altitude"])
                 graphyte.send(key, module["place"]["altitude"])
 
             for data_type in module["data_type"]:
-                key = f'data.{normalise(station_name)}.{normalise(module["module_name"])}.{normalise(data_type)}'
+                key = (
+                    f'data.{normalise(station_name)}.{normalise(module["module_name"])}.'
+                    f"{normalise(data_type)}"
+                )
                 LOG.info("Key %s", key)
-
-                # measures = weatherData.getMeasure(
-                #    device_id=station["_id"],
-                #    scale="max",
-                #    mtype=data_type,
-                #    module_id=module["_id"],
-                #    limit=1,
-                # )
-                # first_point = int(list(measures["body"].keys())[0])
-                # print(datetime.datetime.fromtimestamp(first_point))
-
-                # max = (time.time() - first_point) / 3600
-                # current = 1
-                # while current < max:
-                #     lasts = requests.get(
-                #         "http://100.83.98.73:2002/render",
-                #         params={
-                #             "target": f"timeFunction(netatmo.{key})",
-                #             "from": "-1h",
-                #             "format": "json",
-                #         },
-                #     ).json()
-                #     print(len(lasts))
-                #     print(datetime.datetime.fromtimestamp(lasts[0]["datapoints"][0][1]))
-                #     print(datetime.datetime.fromtimestamp(lasts[0]["datapoints"][-1][1]))
 
                 while True:
                     LOG.debug(
                         "Get measure for %s, from %r", key, datetime.datetime.fromtimestamp(state.get(key, 0))
                     )
-                    measures = weatherData.getMeasure(
+                    measures = weather_data.getMeasure(
                         device_id=station["_id"],
                         scale="max",  # max
                         mtype=data_type,

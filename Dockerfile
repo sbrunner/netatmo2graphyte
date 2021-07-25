@@ -27,12 +27,12 @@ FROM base AS run
 
 RUN python3 -m compileall -q /usr/local/lib/python3.* -x '/pipenv/'
 
-COPY netatmo2graphyte /usr/bin/
-CMD ["netatmo2graphyte"]
+COPY netatmo2graphite /usr/bin/
+CMD ["netatmo2graphite"]
 
 ENV \
   LOGLEVEL=INFO \
-  GRAPHYTE_HOST=127.0.0.1 \
+  GRAPHITE_HOST=127.0.0.1 \
   NETATMO_CLIENT_PASSWORD=REQUIRED \
   NETATMO_CLIENT_USERNAME=REQUIRED \
   NETATMO_CLIENT_SECRET=REQUIRED \

@@ -11,7 +11,7 @@ import graphyte
 import lnetatmo
 import unidecode
 
-LOG = logging.getLogger("netatmo2graphyte")
+LOG = logging.getLogger("netatmo2graphite")
 
 
 def normalise(name):
@@ -123,7 +123,7 @@ def process(state, authorization):
                                 datetime.datetime.fromtimestamp(state[key]),
                                 time_int - state[key],
                             )
-                            state[key] += int(os.environ.get("DAEMON_PROCESS_ADD_ON_IGNORE_SECOUNDS", "0"))
+                            state[key] += int(os.environ.get("DAEMON_PROCESS_ADD_ON_IGNORE_SECOUNDS", "3600"))
                             break_ = True
                             break
                         for value in values:
@@ -138,7 +138,7 @@ def process(state, authorization):
 
                     LOG.debug("Save state %s: %r", key, datetime.datetime.fromtimestamp(time_int))
 
-                    with open("/etc/netatmo2graphyte/state.json", "w") as config_file:
+                    with open("/etc/netatmo2graphite/state.json", "w") as config_file:
                         config_file.write(json.dumps(state))
                     if break_ or state.get(key, 0) > time.time() - delta:
                         break
@@ -148,7 +148,7 @@ def main():
 
     logging.basicConfig(level=os.environ.get("LOGLEVEL", logging.INFO))
 
-    graphyte.init(os.environ["GRAPHYTE_HOST"], prefix="netatmo", interval=10)
+    graphyte.init(os.environ["GRAPHITE_HOST"], prefix="netatmo", interval=10)
 
     graphyte.send("start", 1)
 
@@ -165,13 +165,13 @@ def main():
         sys.exit(1)
 
     state = {}
-    if os.path.exists("/etc/netatmo2graphyte/state.json"):
-        with open("/etc/netatmo2graphyte/state.json") as config_file:
+    if os.path.exists("/etc/netatmo2graphite/state.json"):
+        with open("/etc/netatmo2graphite/state.json") as config_file:
             state = json.loads(config_file.read())
 
     process(state, authorization)
 
-    delay = int(os.environ.get("DAEMON_DELAY_SECONDS", "0"))
+    delay = int(os.environ.get("DAEMON_DELAY_SECONDS", "300"))
     if delay > 0:
         while True:
             time.sleep(delay)

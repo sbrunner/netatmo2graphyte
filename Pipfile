@@ -10,7 +10,7 @@ flake8 = "==3.8.4"
 
 [packages]
 lnetatmo = "==2.1.0"
-graphyte = "==1.6.0"
+graphyte = "==1.7.0"
 unidecode = "==1.2.0"
 
 [requires]

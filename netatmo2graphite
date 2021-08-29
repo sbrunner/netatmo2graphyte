@@ -138,7 +138,7 @@ def process(state, authorization):
 
                     LOG.debug("Save state %s: %r", key, datetime.datetime.fromtimestamp(time_int))
 
-                    with open("/etc/netatmo2graphite/state.json", "w") as config_file:
+                    with open("/etc/netatmo2graphite/state.json", "w", encoding="utf-8") as config_file:
                         config_file.write(json.dumps(state))
                     if break_ or state.get(key, 0) > time.time() - delta:
                         break
@@ -166,7 +166,7 @@ def main():
 
     state = {}
     if os.path.exists("/etc/netatmo2graphite/state.json"):
-        with open("/etc/netatmo2graphite/state.json") as config_file:
+        with open("/etc/netatmo2graphite/state.json", encoding="utf-8") as config_file:
             state = json.loads(config_file.read())
 
     process(state, authorization)

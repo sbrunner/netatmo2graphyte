@@ -5,6 +5,10 @@ version:
     - from: master
       to: latest
 
+checks:
+  required_workflows:
+    clean.yaml: False
+
 publish:
   pypi:
     packages: []

@@ -6,7 +6,6 @@ verify_ssl = true
 [dev-packages]
 prospector = "==1.5.1"
 mypy = "==0.910"
-flake8 = "==3.8.4"
 
 [packages]
 lnetatmo = "==2.1.0"

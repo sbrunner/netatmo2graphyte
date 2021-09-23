@@ -173,7 +173,7 @@ def main():
             try:
                 state = json.loads(data)
             except json.decoder.JSONDecodeError:
-                LOG.error(f"Wrong state: {data}")
+                LOG.error("Wrong state: %s", data)
                 state = {}
 
     process(state, authorization)

@@ -169,7 +169,12 @@ def main():
     state = {}
     if os.path.exists("/etc/netatmo2graphite/state.json"):
         with open("/etc/netatmo2graphite/state.json", encoding="utf-8") as config_file:
-            state = json.loads(config_file.read())
+            data = config_file.read()
+            try:
+                state = json.loads(data)
+            except json.decoder.JSONDecodeError:
+                LOG.error(f"Wrong state: {data}")
+                state = {}
 
     process(state, authorization)
 

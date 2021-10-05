@@ -1,5 +1,6 @@
 strictness: veryhigh
 max-line-length: 110
+doc-warnings: Ture
 
 pylint:
   disable:
@@ -16,6 +17,9 @@ pep8:
     max-line-length: 110
   disable:
     - E203 # whitespace before ':'
+
+bandit:
+  run: true
 
 mypy:
   run: true

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+"""Get the data on Netatmo website and set the the Graphyte."""
+
 import datetime
 import json
 import logging
@@ -14,7 +16,8 @@ import unidecode
 LOG = logging.getLogger("netatmo2graphite")
 
 
-def normalise(name):
+def normalize(name):
+    """Normalize a name for Graphyte."""
     name = name.replace(" ", "_")
     name = name.replace("(", "_")
     name = name.replace(")", "_")
@@ -24,7 +27,8 @@ def normalise(name):
 
 
 def process(state, authorization):
-    delta = int(os.environ.get("DAEMON_PROCESS_END_SECOUNDS", "86400"))
+    """Get the new data on Netatmo website and set the the Graphyte."""
+    delta = int(os.environ.get("DAEMON_PROCESS_END_SECONDS", "86400"))
     graphyte.send("run", 1)
 
     weather_data = lnetatmo.WeatherStationData(authorization)
@@ -44,8 +48,8 @@ def process(state, authorization):
             ]:
                 if data_type in module:
                     key = (
-                        f'status.{normalise(station_name)}.{normalise(module["module_name"])}.'
-                        f"{normalise(data_type)}"
+                        f'status.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                        f"{normalize(data_type)}"
                     )
                     LOG.debug("Key: %s = %s", key, module[data_type])
                     graphyte.send(key, module[data_type])
@@ -59,8 +63,8 @@ def process(state, authorization):
             ]:
                 if data_type in module:
                     key = (
-                        f'dates.{normalise(station_name)}.{normalise(module["module_name"])}.'
-                        f"{normalise(data_type)}"
+                        f'dates.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                        f"{normalize(data_type)}"
                     )
                     LOG.debug("Key: %s = %s", key, module[data_type])
                     graphyte.send(key, module[data_type])
@@ -69,24 +73,24 @@ def process(state, authorization):
             ]:
                 if data_type in module:
                     key = (
-                        f'other.{normalise(station_name)}.{normalise(module["module_name"])}.'
-                        f"{normalise(data_type)}"
+                        f'other.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                        f"{normalize(data_type)}"
                     )
                     LOG.debug("Key: %s = %s", key, module[data_type])
                     graphyte.send(key, module[data_type])
 
             if "place" in module:
                 key = (
-                    f'other.{normalise(station_name)}.{normalise(module["module_name"])}.'
-                    f'{normalise("altitude")}'
+                    f'other.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                    f'{normalize("altitude")}'
                 )
                 LOG.debug("Key: %s = %s", key, module["place"]["altitude"])
                 graphyte.send(key, module["place"]["altitude"])
 
             for data_type in module["data_type"]:
                 key = (
-                    f'data.{normalise(station_name)}.{normalise(module["module_name"])}.'
-                    f"{normalise(data_type)}"
+                    f'data.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                    f"{normalize(data_type)}"
                 )
                 LOG.info("Key %s", key)
 
@@ -117,7 +121,7 @@ def process(state, authorization):
                     ].items():
                         time_int = int(time_str)
                         if key in state and state[key] < time_int - int(
-                            os.environ.get("DAEMON_PROCESS_MAX_MISSING_SECOUNDS", str(86400 * 7))
+                            os.environ.get("DAEMON_PROCESS_MAX_MISSING_SECONDS", str(86400 * 7))
                         ):
                             LOG.info(
                                 "Ignore from date: %r, current: %r, diff: %f",
@@ -125,7 +129,7 @@ def process(state, authorization):
                                 datetime.datetime.fromtimestamp(state[key]),
                                 time_int - state[key],
                             )
-                            state[key] += int(os.environ.get("DAEMON_PROCESS_ADD_ON_IGNORE_SECOUNDS", "3600"))
+                            state[key] += int(os.environ.get("DAEMON_PROCESS_ADD_ON_IGNORE_SECONDS", "3600"))
                             break_ = True
                             break
                         for value in values:
@@ -147,7 +151,7 @@ def process(state, authorization):
 
 
 def main():
-
+    """Run the daemon."""
     logging.basicConfig(level=os.environ.get("LOGLEVEL", logging.INFO))
 
     graphyte.init(os.environ["GRAPHITE_HOST"], prefix="netatmo", interval=10)

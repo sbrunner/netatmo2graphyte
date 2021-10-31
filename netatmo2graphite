@@ -6,6 +6,7 @@ import datetime
 import json
 import logging
 import os
+import shutil
 import sys
 import time
 
@@ -96,14 +97,18 @@ def process(state, authorization):
 
                 while True:
                     LOG.debug(
-                        "Get measure for %s, from %r", key, datetime.datetime.fromtimestamp(state.get(key, 0))
+                        "Get measure for %s, from %r",
+                        key,
+                        datetime.datetime.fromtimestamp(
+                            state.get(key, float(os.environ.get("DAEMON_DEFAULT_TIMESTAMP", "0")))
+                        ),
                     )
                     measures = weather_data.getMeasure(
                         device_id=station["_id"],
                         scale="max",  # max
                         mtype=data_type,
                         module_id=module["_id"],
-                        date_begin=state.get(key, 0),
+                        date_begin=state.get(key, float(os.environ.get("DAEMON_DEFAULT_TIMESTAMP", "0"))),
                     )
                     if measures is None:
                         # Netatmo error
@@ -144,8 +149,10 @@ def process(state, authorization):
 
                     LOG.debug("Save state %s: %r", key, datetime.datetime.fromtimestamp(time_int))
 
-                    with open("/etc/netatmo2graphite/state.json", "w", encoding="utf-8") as config_file:
+                    with open("/etc/netatmo2graphite/state.json_", "w", encoding="utf-8") as config_file:
                         config_file.write(json.dumps(state))
+                    shutil.move("/etc/netatmo2graphite/state.json", "/etc/netatmo2graphite/state.json.bak")
+                    shutil.move("/etc/netatmo2graphite/state.json_", "/etc/netatmo2graphite/state.json")
                     if break_ or state.get(key, 0) > time.time() - delta:
                         break
 

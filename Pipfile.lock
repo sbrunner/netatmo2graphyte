@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2f5ef683611c8c79a6a156ea6f0347c29010250655fbcc031366026a03d3c6c4"
+            "sha256": "2f67b757093322138eb660d32481f3d65ddf66b18739c0c1cd8167578dcc7cc1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,10 +18,10 @@
     "default": {
         "graphyte": {
             "hashes": [
-                "sha256:b2473bc215d80364cc9cff0f46d2d483f23bed5fd241e3d35cb49c009a1da3cf"
+                "sha256:5c6061f32375ea9de8cccd78b259c928670fbabcf6fd4ddbf160e77124289be2"
             ],
             "index": "pypi",
-            "version": "==1.7.0"
+            "version": "==1.7.1"
         },
         "lnetatmo": {
             "hashes": [

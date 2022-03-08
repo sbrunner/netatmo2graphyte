@@ -12,7 +12,7 @@ pylint:
     - too-many-nested-blocks
     - too-few-public-methods
 
-pep8:
+pycodestyle:
   options:
     max-line-length: 110
   disable:
@@ -24,12 +24,13 @@ bandit:
 mypy:
   run: true
   options:
-    python_version: 3.8
+    python-version: 3.8
     ignore-missing-imports: True
-    warn-redundant-casts: True
-    warn-unused-ignores: True
-    check-untyped-defs: True
-    skip-version-check: True
+    warn:
+      - redundant-casts
+      - unused-ignores
+    check:
+      - untyped-defs
 
 mccabe:
   run: false

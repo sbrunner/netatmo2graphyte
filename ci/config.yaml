@@ -7,7 +7,7 @@ version:
 
 checks:
   required_workflows:
-    clean.yaml: False
+    clean.yaml: false
 
 publish:
   pypi:
@@ -16,3 +16,4 @@ publish:
     repository:
       github:
         versions: []
+    dispatch: false

@@ -8,3 +8,18 @@ include_trailing_comma = true
 force_grid_wrap = false
 use_parentheses = true
 line_length = 110
+
+[tool.poetry]
+name = 'shifter-jupyterlab'
+version = '0.0.0'
+description = 'Not used'
+authors = []
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+lnetatmo = "==2.*"
+graphyte = "==1.*"
+unidecode = "==1.*"
+
+[tool.poetry.dev-dependencies]
+prospector = {extras = ["with_bandit", "with_mypy"], version = "==1.*"}

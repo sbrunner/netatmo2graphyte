@@ -114,16 +114,14 @@ def process(state, authorization):
                         # Netatmo error
                         LOG.error("Exit on Netatmo error 1")
                         sys.exit(1)
-                    if not measures["body"]:  # pylint: disable=unsubscriptable-object
+                    if not measures["body"]:
                         # No more data
                         break
-                    if isinstance(measures["body"], list):  # pylint: disable=unsubscriptable-object
-                        LOG.error("Error: %r", measures["body"][0])  # pylint: disable=unsubscriptable-object
+                    if isinstance(measures["body"], list):
+                        LOG.error("Error: %r", measures["body"][0])
                         sys.exit(1)
                     break_ = False
-                    for time_str, values in measures[  # pylint: disable=unsubscriptable-object
-                        "body"
-                    ].items():
+                    for time_str, values in measures["body"].items():
                         time_int = int(time_str)
                         if key in state and state[key] < time_int - int(
                             os.environ.get("DAEMON_PROCESS_MAX_MISSING_SECONDS", str(86400 * 7))

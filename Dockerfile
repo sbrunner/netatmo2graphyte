@@ -1,31 +1,46 @@
 FROM ubuntu:20.04 AS base
 
-RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive apt install --yes --no-install-recommends python3-pip binutils && \
-    apt-get clean && \
-    rm -r /var/lib/apt/lists/*
+RUN --mount=type=cache,target=/var/lib/apt/lists \
+    --mount=type=cache,target=/var/cache,sharing=locked \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends python3-pip binutils
 
 WORKDIR /app
 
 COPY requirements.txt /tmp/
-RUN python3 -m pip install --disable-pip-version-check --no-cache-dir --requirement=/tmp/requirements.txt && \
+RUN --mount=type=cache,target=/root/.cache \
+    python3 -m pip install --disable-pip-version-check --requirement=/tmp/requirements.txt && \
     rm --recursive --force /tmp/*
 
-COPY Pipfile Pipfile.lock ./
-RUN pipenv sync --system --clear && \
-    rm --recursive --force /usr/local/lib/python3.*/dist-packages/tests/ /tmp/* /root/.cache/* && \
-    (strip /usr/local/lib/python3.*/dist-packages/*/*.so || true)
+
+# Used to convert the locked packages by poetry to pip requirements format
+FROM base as poetry
+
+# Install poetry
+WORKDIR /tmp
+COPY requirements.txt ./
+RUN --mount=type=cache,target=/root/.cache \
+    python3 -m pip install --disable-pip-version-check --requirement=requirements.txt
+
+# Do the conversion
+COPY poetry.lock pyproject.toml ./
+RUN poetry export --output=requirements.txt && \
+    poetry export --dev --output=requirements-dev.txt
 
 
 FROM base AS checker
 
-RUN \
-    pipenv sync --system --clear --dev && \
-    rm --recursive --force /tmp/* /root/.cache/*
+RUN --mount=type=cache,target=/root/.cache \
+    --mount=type=bind,from=poetry,source=/tmp,target=/poetry \
+    python3 -m pip install --disable-pip-version-check --requirement=/poetry/requirements-dev.txt
 
 FROM base AS run
 
-RUN python3 -m compileall -q /usr/local/lib/python3.* -x '/pipenv/'
+RUN --mount=type=cache,target=/root/.cache \
+    --mount=type=bind,from=poetry,source=/tmp,target=/poetry \
+    python3 -m pip install --disable-pip-version-check --requirement=/poetry/requirements.txt
+
+RUN python3 -m compileall -q /usr/local/lib/python3.*
 
 COPY netatmo2graphite /usr/bin/
 CMD ["netatmo2graphite"]

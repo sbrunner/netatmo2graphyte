@@ -1,5 +1,5 @@
 *
 !requirements.txt
-!Pipfile
-!Pipfile.lock
+!pyproject.toml
+!poetry.lock
 !netatmo2graphite

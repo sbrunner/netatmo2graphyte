@@ -1,4 +1,5 @@
 GITHUB_REPOSITORY ?= sbrunner/netatmo2graphite
+export DOCKER_BUILDKIT = 1
 
 .PHONY: build
 build: checks
@@ -17,4 +18,4 @@ checks: prospector
 
 .PHONY: prospector
 prospector: build-checker
-	docker run --volume=${PWD}:/app $(GITHUB_REPOSITORY)-checker prospector --output=pylint netatmo2graphite
+	docker run --volume=${PWD}:/app $(GITHUB_REPOSITORY)-checker prospector -X --output=pylint netatmo2graphite

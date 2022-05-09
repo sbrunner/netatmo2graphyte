@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 AS base
+FROM ubuntu:22.04 AS base
 
 RUN --mount=type=cache,target=/var/lib/apt/lists \
     --mount=type=cache,target=/var/cache,sharing=locked \
@@ -31,13 +31,13 @@ FROM base AS checker
 
 RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,from=poetry,source=/tmp,target=/poetry \
-    python3 -m pip install --disable-pip-version-check --requirement=/poetry/requirements-dev.txt
+    python3 -m pip install --disable-pip-version-check --no-deps --requirement=/poetry/requirements-dev.txt
 
 FROM base AS run
 
 RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,from=poetry,source=/tmp,target=/poetry \
-    python3 -m pip install --disable-pip-version-check --requirement=/poetry/requirements.txt
+    python3 -m pip install --disable-pip-version-check --no-deps --requirement=/poetry/requirements.txt
 
 RUN python3 -m compileall -q /usr/local/lib/python3.*
 

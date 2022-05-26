@@ -3,6 +3,7 @@ FROM ubuntu:22.04 AS base
 RUN --mount=type=cache,target=/var/lib/apt/lists \
     --mount=type=cache,target=/var/cache,sharing=locked \
     apt-get update && \
+    apt-get upgrade --yes && \
     DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends python3-pip binutils
 
 WORKDIR /app

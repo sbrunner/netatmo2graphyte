@@ -18,4 +18,4 @@ checks: prospector
 
 .PHONY: prospector
 prospector: build-checker
-	docker run --volume=${PWD}:/app $(GITHUB_REPOSITORY)-checker prospector -X --output=pylint netatmo2graphite
+	docker run --rm --volume=${PWD}:/app $(GITHUB_REPOSITORY)-checker prospector -X --output=pylint netatmo2graphite

@@ -1,10 +1,11 @@
 FROM ubuntu:22.04 AS base
+SHELL ["/bin/bash", "-o", "pipefail", "-cux"]
 
 RUN --mount=type=cache,target=/var/lib/apt/lists \
     --mount=type=cache,target=/var/cache,sharing=locked \
     apt-get update \
     && apt-get upgrade --yes \
-    && DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends python3-pip binutils
+    && apt-get install --yes --no-install-recommends python3-pip binutils
 
 WORKDIR /app
 
@@ -15,7 +16,7 @@ RUN --mount=type=cache,target=/root/.cache \
 # Used to convert the locked packages by poetry to pip requirements format
 FROM base as poetry
 
-# Install poetry
+# Install Poetry
 WORKDIR /tmp
 COPY requirements.txt ./
 RUN --mount=type=cache,target=/root/.cache \
@@ -38,7 +39,7 @@ RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,from=poetry,source=/tmp,target=/poetry \
     python3 -m pip install --disable-pip-version-check --no-deps --requirement=/poetry/requirements.txt
 
-RUN python3 -m compileall -q /usr/local/lib/python3.* && pip freeze --all >/requirements.txt
+RUN python3 -m compileall -q /usr/local/lib/python3.* && pip freeze --all > /requirements.txt
 
 COPY netatmo2graphite /usr/bin/
 CMD ["netatmo2graphite"]

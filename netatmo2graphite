@@ -17,6 +17,10 @@ import unidecode
 LOG = logging.getLogger("netatmo2graphite")
 
 
+class TooManyRequests(Exception):
+    """Too many requests."""
+
+
 def normalize(name):
     """Normalize a name for Graphyte."""
     name = name.replace(" ", "_")
@@ -32,7 +36,10 @@ def process(state, authorization):
     delta = int(os.environ.get("DAEMON_PROCESS_END_SECONDS", "86400"))
     graphyte.send("run", 1)
 
-    weather_data = lnetatmo.WeatherStationData(authorization)
+    try:
+        weather_data = lnetatmo.WeatherStationData(authorization)
+    except TypeError as error:
+        raise TooManyRequests() from error
 
     for station in weather_data.stations.values():
         station_name = station["home_name"]
@@ -184,13 +191,19 @@ def main():
             except json.decoder.JSONDecodeError:
                 LOG.error("Wrong state: %s", data)
 
-    process(state, authorization)
+    try:
+        process(state, authorization)
+    except TooManyRequests:
+        LOG.error("Too many requests")
 
     delay = int(os.environ.get("DAEMON_DELAY_SECONDS", "300"))
     if delay > 0:
         while True:
             time.sleep(delay)
-            process(state, authorization)
+            try:
+                process(state, authorization)
+            except TooManyRequests:
+                LOG.error("Too many requests, will continue...")
 
 
 if __name__ == "__main__":

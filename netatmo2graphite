@@ -179,7 +179,7 @@ def main():
     )
 
     if authorization is None:
-        LOG.error("Exit on Netatmo error 2")
+        LOG.error("Netatmo login error")
         sys.exit(1)
 
     state = {}
@@ -191,11 +191,6 @@ def main():
             except json.decoder.JSONDecodeError:
                 LOG.error("Wrong state: %s", data)
 
-    try:
-        process(state, authorization)
-    except TooManyRequests:
-        LOG.error("Too many requests")
-
     delay = int(os.environ.get("DAEMON_DELAY_SECONDS", "300"))
     if delay > 0:
         while True:
@@ -204,6 +199,11 @@ def main():
                 process(state, authorization)
             except TooManyRequests:
                 LOG.error("Too many requests, will continue...")
+    else:
+        try:
+            process(state, authorization)
+        except TooManyRequests:
+            LOG.error("Too many requests")
 
 
 if __name__ == "__main__":

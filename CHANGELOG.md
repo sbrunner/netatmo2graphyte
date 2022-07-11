@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.1](https://github.com/sbrunner/netatmo2graphite/tree/1.0.1) (2022-07-11)
+
+[Full Changelog](https://github.com/sbrunner/netatmo2graphite/compare/1.0.0...1.0.1)
+
+#### :bug: Bug Fixes
+
+- Don't mix daemon and non daemon mode [\#106](https://github.com/sbrunner/netatmo2graphite/pull/106) ([sbrunner](https://github.com/sbrunner))
+- Fix error when we do too many requests [\#105](https://github.com/sbrunner/netatmo2graphite/pull/105) ([sbrunner](https://github.com/sbrunner))
+
+#### :wrench: Build, CI, Tests, Code style
+
+- Update the changelog [\#102](https://github.com/sbrunner/netatmo2graphite/pull/102) ([github-actions[bot]](https://github.com/apps/github-actions))
+
+#### :package: Dependencies update
+
+- Lock file maintenance [\#107](https://github.com/sbrunner/netatmo2graphite/pull/107) ([renovate[bot]](https://github.com/apps/renovate))
+- Lock file maintenance [\#104](https://github.com/sbrunner/netatmo2graphite/pull/104) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [1.0.0](https://github.com/sbrunner/netatmo2graphite/tree/1.0.0) (2022-07-03)
 
 [Full Changelog](https://github.com/sbrunner/netatmo2graphite/compare/227edf87b31d6f6a9a94ebe4c1069a3f3fc20bf9...1.0.0)

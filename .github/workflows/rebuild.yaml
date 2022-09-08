@@ -2,7 +2,7 @@ name: Rebuild
 
 on:
   schedule:
-    - cron: 30 2 * * *
+  - cron: 30 2 * * *
 
 env:
   DOCKER_BUILDKIT: 1
@@ -17,25 +17,25 @@ jobs:
       fail-fast: false
       matrix:
         branch:
-          - master
+        - master
 
     steps:
-      - run: docker system prune --all --force
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ matrix.branch }}
+    - run: docker system prune --all --force
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ matrix.branch }}
 
-      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
-      - run: python3 -m pip install --user --requirement=ci/requirements.txt
+    - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
+    - run: python3 -m pip install --user --requirement=ci/requirements.txt
 
-      - name: Checks
-        run: c2cciutils-checks
+    - name: Checks
+      run: c2cciutils-checks
 
-      - name: Build
-        run: docker build --tag=${GITHUB_REPOSITORY} .
+    - name: Build
+      run: docker build --tag=${GITHUB_REPOSITORY} .
 
-      - run: make checks
+    - run: make checks
 
-      - run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-      - name: Publish
-        run: c2cciutils-publish --type=rebuild --branch=${{ matrix.branch }}
+    - run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
+    - name: Publish
+      run: c2cciutils-publish --type=rebuild --branch=${{ matrix.branch }}

@@ -1,9 +1,8 @@
----
 name: Rebuild
 
 on:
   schedule:
-    - cron: '30 2 * * *'
+    - cron: 30 2 * * *
 
 env:
   DOCKER_BUILDKIT: 1
@@ -21,6 +20,7 @@ jobs:
           - master
 
     steps:
+      - run: docker system prune --all --force
       - uses: actions/checkout@v3
         with:
           ref: ${{ matrix.branch }}
@@ -36,6 +36,7 @@ jobs:
 
       - run: make checks
 
-      - run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
+      - run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD
+          }}
       - name: Publish
         run: c2cciutils-publish --type=rebuild --branch=${{ matrix.branch }}

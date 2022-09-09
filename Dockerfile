@@ -37,7 +37,8 @@ FROM base AS run
 
 RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,from=poetry,source=/tmp,target=/poetry \
-    python3 -m pip install --disable-pip-version-check --no-deps --requirement=/poetry/requirements.txt
+    python3 -m pip install --disable-pip-version-check --no-deps --requirement=/poetry/requirements.txt \
+    && python3 -m pip freeze > /requirements.txt
 
 RUN python3 -m compileall -q /usr/local/lib/python3.* && pip freeze --all > /requirements.txt
 

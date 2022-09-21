@@ -4,59 +4,47 @@
 
 [Full Changelog](https://github.com/sbrunner/netatmo2graphite/compare/1.0.0...1.0.1)
 
-#### :bug: Bug Fixes
+**Fixed bugs:**
 
 - Don't mix daemon and non daemon mode [\#106](https://github.com/sbrunner/netatmo2graphite/pull/106) ([sbrunner](https://github.com/sbrunner))
 - Fix error when we do too many requests [\#105](https://github.com/sbrunner/netatmo2graphite/pull/105) ([sbrunner](https://github.com/sbrunner))
 
-#### :wrench: Build, CI, Tests, Code style
-
-- Update the changelog [\#102](https://github.com/sbrunner/netatmo2graphite/pull/102) ([github-actions[bot]](https://github.com/apps/github-actions))
-
-#### :package: Dependencies update
+**Merged pull requests:**
 
 - Lock file maintenance [\#107](https://github.com/sbrunner/netatmo2graphite/pull/107) ([renovate[bot]](https://github.com/apps/renovate))
 - Lock file maintenance [\#104](https://github.com/sbrunner/netatmo2graphite/pull/104) ([renovate[bot]](https://github.com/apps/renovate))
+- Update the changelog [\#102](https://github.com/sbrunner/netatmo2graphite/pull/102) ([github-actions[bot]](https://github.com/apps/github-actions))
 
 ## [1.0.0](https://github.com/sbrunner/netatmo2graphite/tree/1.0.0) (2022-07-03)
 
 [Full Changelog](https://github.com/sbrunner/netatmo2graphite/compare/227edf87b31d6f6a9a94ebe4c1069a3f3fc20bf9...1.0.0)
 
-#### :sparkles: Enhancements
+**Implemented enhancements:**
 
 - Add time on ignore [\#3](https://github.com/sbrunner/netatmo2graphite/pull/3) ([sbrunner](https://github.com/sbrunner))
 
-#### :bug: Bug Fixes
+**Fixed bugs:**
 
 - Fix lost state [\#30](https://github.com/sbrunner/netatmo2graphite/pull/30) ([sbrunner](https://github.com/sbrunner))
 
-#### :books: Documentation
+**Merged pull requests:**
 
 - Add generated changelog [\#101](https://github.com/sbrunner/netatmo2graphite/pull/101) ([sbrunner](https://github.com/sbrunner))
-
-#### :wrench: Build, CI, Tests, Code style
-
-- Don't run 2 CI jobs in a pull request [\#95](https://github.com/sbrunner/netatmo2graphite/pull/95) ([sbrunner](https://github.com/sbrunner))
-- Snyk [\#92](https://github.com/sbrunner/netatmo2graphite/pull/92) ([sbrunner](https://github.com/sbrunner))
-- Fix Prettier [\#86](https://github.com/sbrunner/netatmo2graphite/pull/86) ([sbrunner](https://github.com/sbrunner))
-- Use Renovate and Poetry [\#76](https://github.com/sbrunner/netatmo2graphite/pull/76) ([sbrunner](https://github.com/sbrunner))
-- Fix audit and rebuild [\#5](https://github.com/sbrunner/netatmo2graphite/pull/5) ([sbrunner](https://github.com/sbrunner))
-- Add CI toolchain [\#1](https://github.com/sbrunner/netatmo2graphite/pull/1) ([sbrunner](https://github.com/sbrunner))
-
-#### :package: Dependencies update
-
 - Update dependency c2cciutils to v1.2.0 [\#100](https://github.com/sbrunner/netatmo2graphite/pull/100) ([renovate[bot]](https://github.com/apps/renovate))
 - Lock file maintenance [\#99](https://github.com/sbrunner/netatmo2graphite/pull/99) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency c2cciutils to v1.2.dev20220621145847 [\#98](https://github.com/sbrunner/netatmo2graphite/pull/98) ([renovate[bot]](https://github.com/apps/renovate))
 - Lock file maintenance [\#97](https://github.com/sbrunner/netatmo2graphite/pull/97) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency c2cciutils to v1.2.dev20220613045412 [\#96](https://github.com/sbrunner/netatmo2graphite/pull/96) ([renovate[bot]](https://github.com/apps/renovate))
+- Don't run 2 CI jobs in a pull request [\#95](https://github.com/sbrunner/netatmo2graphite/pull/95) ([sbrunner](https://github.com/sbrunner))
 - Lock file maintenance [\#94](https://github.com/sbrunner/netatmo2graphite/pull/94) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency c2cciutils to v1.2.dev20220601085126 [\#93](https://github.com/sbrunner/netatmo2graphite/pull/93) ([renovate[bot]](https://github.com/apps/renovate))
+- Snyk [\#92](https://github.com/sbrunner/netatmo2graphite/pull/92) ([sbrunner](https://github.com/sbrunner))
 - Lock file maintenance [\#91](https://github.com/sbrunner/netatmo2graphite/pull/91) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency c2cciutils to v1.2.dev20220527115520 [\#90](https://github.com/sbrunner/netatmo2graphite/pull/90) ([renovate[bot]](https://github.com/apps/renovate))
 - Lock file maintenance [\#89](https://github.com/sbrunner/netatmo2graphite/pull/89) ([renovate[bot]](https://github.com/apps/renovate))
 - Update github/codeql-action action to v2 [\#88](https://github.com/sbrunner/netatmo2graphite/pull/88) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency c2cciutils to v1.2.dev20220509122615 [\#87](https://github.com/sbrunner/netatmo2graphite/pull/87) ([renovate[bot]](https://github.com/apps/renovate))
+- Fix Prettier [\#86](https://github.com/sbrunner/netatmo2graphite/pull/86) ([sbrunner](https://github.com/sbrunner))
 - Lock file maintenance [\#85](https://github.com/sbrunner/netatmo2graphite/pull/85) ([renovate[bot]](https://github.com/apps/renovate))
 - Lock file maintenance [\#84](https://github.com/sbrunner/netatmo2graphite/pull/84) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency ubuntu to v22 [\#83](https://github.com/sbrunner/netatmo2graphite/pull/83) ([renovate[bot]](https://github.com/apps/renovate))
@@ -65,6 +53,7 @@
 - Lock file maintenance [\#80](https://github.com/sbrunner/netatmo2graphite/pull/80) ([renovate[bot]](https://github.com/apps/renovate))
 - Lock file maintenance [\#79](https://github.com/sbrunner/netatmo2graphite/pull/79) ([renovate[bot]](https://github.com/apps/renovate))
 - Update actions/checkout action to v3 [\#78](https://github.com/sbrunner/netatmo2graphite/pull/78) ([renovate[bot]](https://github.com/apps/renovate))
+- Use Renovate and Poetry [\#76](https://github.com/sbrunner/netatmo2graphite/pull/76) ([sbrunner](https://github.com/sbrunner))
 - Bump c2cciutils from 1.2.dev20220331120018 to 1.2.dev20220414132101 [\#75](https://github.com/sbrunner/netatmo2graphite/pull/75) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump pipenv from 2022.3.28 to 2022.4.8 [\#74](https://github.com/sbrunner/netatmo2graphite/pull/74) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump c2cciutils from 1.2.dev20220317100006 to 1.2.dev20220331120018 [\#73](https://github.com/sbrunner/netatmo2graphite/pull/73) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -130,7 +119,9 @@
 - Bump c2cciutils from 1.1.dev20210729075943 to 1.1.dev20210810100526 [\#8](https://github.com/sbrunner/netatmo2graphite/pull/8) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump c2cciutils from 1.1.dev20210727151149 to 1.1.dev20210729075943 [\#7](https://github.com/sbrunner/netatmo2graphite/pull/7) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump c2cciutils from 1.1.dev20210712112154 to 1.1.dev20210727151149 [\#6](https://github.com/sbrunner/netatmo2graphite/pull/6) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix audit and rebuild [\#5](https://github.com/sbrunner/netatmo2graphite/pull/5) ([sbrunner](https://github.com/sbrunner))
 - Bump prospector from 1.3.0 to 1.3.1 [\#4](https://github.com/sbrunner/netatmo2graphite/pull/4) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump c2cciutils from 1.1.dev20210709152623 to 1.1.dev20210712112154 [\#2](https://github.com/sbrunner/netatmo2graphite/pull/2) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add CI toolchain [\#1](https://github.com/sbrunner/netatmo2graphite/pull/1) ([sbrunner](https://github.com/sbrunner))
 
 \* _This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)_

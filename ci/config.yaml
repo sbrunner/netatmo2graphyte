@@ -5,13 +5,6 @@ version:
     - from: master
       to: latest
 
-checks:
-  required_workflows:
-    clean.yaml: false
-  codespell:
-    ignore_re:
-      - ^poetry.lock$
-
 publish:
   pypi:
     packages: []

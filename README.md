@@ -50,3 +50,12 @@ pattern = netatmo\..*
 xFilesFactor = 0
 aggregationMethod = average
 ```
+
+## Contributing
+
+Install the pre-commit hooks:
+
+```bash
+pip install pre-commit
+pre-commit install --allow-missing-config
+```

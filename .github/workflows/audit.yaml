@@ -23,6 +23,10 @@ jobs:
           ref: ${{ matrix.branch }}
           token: ${{ secrets.TOKEN }}
 
+      - name: Configure git user email
+        run: git config user.email "snyk@ci.com"
+      - name: Configure git user name
+        run: git config user.name "Snyk autofix"
       - run: git config --global user.email "sbrunner@ci.org"
       - run: git config --global user.name "Snyk autofix"
 

@@ -1,10 +1,11 @@
+profiles:
+  - duplicated
 strictness: veryhigh
 max-line-length: 110
-doc-warnings: True
+doc-warnings: true
 
 pylint:
   disable:
-    - wrong-import-order
     - too-many-arguments
     - too-many-branches
     - too-many-locals
@@ -15,9 +16,7 @@ pylint:
 pycodestyle:
   options:
     max-line-length: 110
-  disable:
-    - E203 # whitespace before ':'
-
+  disable: []
 pydocstyle:
   disable:
     - D203 # 1 blank line required before class docstring (found 0)
@@ -29,7 +28,7 @@ mypy:
   run: true
   options:
     python-version: 3.8
-    ignore-missing-imports: True
+    ignore-missing-imports: true
     warn:
       - redundant-casts
       - unused-ignores

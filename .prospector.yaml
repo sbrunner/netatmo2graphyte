@@ -1,5 +1,6 @@
-profiles:
+inherits:
   - duplicated
+
 strictness: veryhigh
 max-line-length: 110
 doc-warnings: true
@@ -16,7 +17,6 @@ pylint:
 pycodestyle:
   options:
     max-line-length: 110
-  disable: []
 pydocstyle:
   disable:
     - D203 # 1 blank line required before class docstring (found 0)

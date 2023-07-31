@@ -170,13 +170,7 @@ def main():
 
     graphyte.send("start", 1)
 
-    authorization = lnetatmo.ClientAuth(
-        clientId=os.environ["NETATMO_CLIENT_ID"],
-        clientSecret=os.environ["NETATMO_CLIENT_SECRET"],
-        username=os.environ["NETATMO_CLIENT_USERNAME"],
-        password=os.environ["NETATMO_CLIENT_PASSWORD"],
-        scope="read_station",
-    )
+    authorization = lnetatmo.ClientAuth()
 
     if authorization is None:
         LOG.error("Netatmo login error")

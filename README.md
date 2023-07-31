@@ -9,14 +9,15 @@ To run use:
 ```
 docker run --detatch --volume=state:/etc/netatmo2graphite \
  --env=GRAPHITE_HOST=<host> \
- --env=NETATMO_CLIENT_PASSWORD=<password> \
- --env=NETATMO_CLIENT_USERNAME=<username> \
- --env=NETATMO_CLIENT_SECRET=<client secret> \
- --env=NETATMO_CLIENT_ID=<client id> \
+ --env=CLIENT_SECRET=<client secret> \
+ --env=CLIENT_ID=<client id> \
+ --env=REFRESH_TOKEN=<refresh token> \
  sbrunner/netatmo2graphite
 ```
 
-Get Netatmo client credentials: This application tries to get data from the Netatmo API. For that to work you will need to create an application in the [Netatmo developer console](https://dev.netatmo.com/apps/), so that you can get a Client ID and secret.
+Get Netatmo client credentials: This application tries to get data from the Netatmo API. For that to work you will need to create an application in the [Netatmo developer console](https://dev.netatmo.com/apps/), so that you can get the `client id` and `client secret`.
+
+In 'Token generator' create a `read_station` token, the you will obtain the `refresh token`.
 
 Careful: The first import can takes many times
 

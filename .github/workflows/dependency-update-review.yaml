@@ -20,3 +20,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           AUTHOR: renovate[bot]
+    if: github.event.pull_request.user.login == 'renovate[bot]'

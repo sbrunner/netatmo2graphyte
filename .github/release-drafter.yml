@@ -1,0 +1,32 @@
+template: |
+  ## Changes
+
+  $CHANGES
+
+autolabeler:
+  - label: fix
+    title:
+      - /^fix/i
+      - /^Bugfix/i
+  - label: core
+    files:
+      - .github/**
+      - ci/**
+  - label: enhancement
+    files:
+      - netatmo2graphite/**
+
+categories:
+  - title: Features
+    labels:
+      - enhancement
+  - title: Bug Fixes
+    labels:
+      - bug
+  - title: Maintenance
+    labels:
+      - chore
+  - title: Dependencies
+    collapse-after: 3
+    labels:
+      - dependencies

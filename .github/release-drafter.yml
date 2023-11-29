@@ -21,9 +21,11 @@ categories:
     labels:
       - enhancement
   - title: Bug Fixes
+    collapse-after: 10
     labels:
       - bug
   - title: Maintenance
+    collapse-after: 3
     labels:
       - chore
   - title: Dependencies

@@ -9,6 +9,8 @@ autolabeler:
       - /^fix/i
       - /^Bugfix/i
   - label: core
+    title:
+      - /CI updates/
     files:
       - .github/**
       - ci/**

@@ -10,8 +10,12 @@ autolabeler:
       - /^Bugfix/i
   - label: core
     title:
-      - /CI updates/
-      - /Fix the repository/
+      - /^CI updates$/
+      - /^Fix the repository$/
+      - /^Update to c2cciutils version.*/
+      - /.*renovate.*/i
+      - /^Add/update pre-commit hooks$/
+      - /.*workflow.*/i
     files:
       - .github/**
       - ci/**

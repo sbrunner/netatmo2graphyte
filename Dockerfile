@@ -45,6 +45,8 @@ RUN python3 -m compileall -q /usr/local/lib/python3.* && pip freeze --all > /req
 COPY netatmo2graphite /usr/bin/
 CMD ["netatmo2graphite"]
 
+RUN echo '{}' > ~/.netatmo.credentials
+
 ENV \
     LOGLEVEL=INFO \
     GRAPHITE_HOST=127.0.0.1 \

@@ -429,13 +429,13 @@ with-vulture = ["vulture (>=1.5)"]
 
 [[package]]
 name = "prospector-profile-duplicated"
-version = "1.2.0"
+version = "1.5.0"
 description = "Profile that can be used to disable the duplicated or conflict rules between Prospector and other tools"
 optional = false
 python-versions = "*"
 files = [
-    {file = "prospector_profile_duplicated-1.2.0-py2.py3-none-any.whl", hash = "sha256:48d7e2376788c82597f8e17707a402e4885f116f67145674120b784d3ea11d42"},
-    {file = "prospector_profile_duplicated-1.2.0.tar.gz", hash = "sha256:15465da9d5b07035693374a6bb12159d0993ef85948e94f958f5632861f577f5"},
+    {file = "prospector_profile_duplicated-1.5.0-py2.py3-none-any.whl", hash = "sha256:fd4d3272ff6b5ceead036f4a60da6dd7aa5317057f66c735994b75542c9a0815"},
+    {file = "prospector_profile_duplicated-1.5.0.tar.gz", hash = "sha256:c1d6074ebb44fd3ea6a7b85e96d58a27f6e525687b019ef94924a9c8d2ccd5d5"},
 ]
 
 [[package]]
@@ -871,4 +871,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "ba8eff15fdecc5a4e7da1c855b6a7c6bb60f7e2d6d7d7c9fe1e45795530c990c"
+content-hash = "39497824f76da234226ab48faa3de78a39845ef6207c79ad04153f932ab5f2d6"

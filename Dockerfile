@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS base
+FROM ubuntu:24.04 AS base
 SHELL ["/bin/bash", "-o", "pipefail", "-cux"]
 
 RUN --mount=type=cache,target=/var/lib/apt/lists \

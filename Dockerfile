@@ -1,11 +1,12 @@
-FROM ubuntu:22.04 AS base
+FROM ubuntu:24.04 AS base
 SHELL ["/bin/bash", "-o", "pipefail", "-cux"]
 
 RUN --mount=type=cache,target=/var/lib/apt/lists \
     --mount=type=cache,target=/var/cache,sharing=locked \
     apt-get update \
     && apt-get upgrade --yes \
-    && apt-get install --yes --no-install-recommends python3-pip binutils
+    && apt-get install --yes --no-install-recommends python3-pip binutils \
+    && rm /usr/lib/python*/EXTERNALLY-MANAGED
 
 WORKDIR /app
 

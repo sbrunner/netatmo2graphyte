@@ -60,8 +60,8 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/libnettle8t64: 3.9.1-2.2build1
   ubuntu_24_04/libnpth0t64: 1.6-3.1build1
   ubuntu_24_04/libp11-kit0: 0.25.3-4ubuntu2
-  ubuntu_24_04/libpam-modules: 1.5.3-5ubuntu5.1
-  ubuntu_24_04/libpam-modules-bin: 1.5.3-5ubuntu5.1
+  ubuntu_24_04/libpam-modules: 1.5.3-5ubuntu5
+  ubuntu_24_04/libpam-modules-bin: 1.5.3-5ubuntu5
   ubuntu_24_04/libpam-runtime: 1.5.3-5ubuntu5.1
   ubuntu_24_04/libpam0g: 1.5.3-5ubuntu5.1
   ubuntu_24_04/libpcre2-8-0: 10.42-4ubuntu2

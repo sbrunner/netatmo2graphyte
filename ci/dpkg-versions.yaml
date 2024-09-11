@@ -40,7 +40,7 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/libctf0: 2.42-4ubuntu2
   ubuntu_24_04/libdb5.3t64: 5.3.28+dfsg2-7
   ubuntu_24_04/libdebconfclient0: 0.271ubuntu3
-  ubuntu_24_04/libexpat1: 2.6.1-2build1
+  ubuntu_24_04/libexpat1: 2.6.1-2ubuntu0.1
   ubuntu_24_04/libext2fs2t64: 1.47.0-2.4~exp1ubuntu4.1
   ubuntu_24_04/libffi8: 3.4.6-1build1
   ubuntu_24_04/libgcc-s1: 14-20240412-0ubuntu1

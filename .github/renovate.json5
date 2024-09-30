@@ -60,13 +60,6 @@
       separateMinorPatch: false,
       matchDepNames: ['poetry', 'pip'],
     },
-    /** Update dpkg versions at any time */
-    {
-      matchPaths: ['ci/dpkg-versions.yaml'],
-      schedule: ['at any time'],
-      groupName: 'dpkg',
-      automerge: true,
-    },
     /** Support the 4 parts of shellcheck-py version with a v prefix */
     {
       versioning: 'regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$',

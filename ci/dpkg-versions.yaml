@@ -2,9 +2,9 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/apt: 2.7.14build2
   ubuntu_24_04/base-passwd: 3.6.3build1
   ubuntu_24_04/bash: 5.2.21-2ubuntu4
-  ubuntu_24_04/binutils: 2.42-4ubuntu2
-  ubuntu_24_04/binutils-common: 2.42-4ubuntu2
-  ubuntu_24_04/binutils-x86-64-linux-gnu: 2.42-4ubuntu2
+  ubuntu_24_04/binutils: 2.42-4ubuntu2.3
+  ubuntu_24_04/binutils-common: 2.42-4ubuntu2.3
+  ubuntu_24_04/binutils-x86-64-linux-gnu: 2.42-4ubuntu2.3
   ubuntu_24_04/bsdutils: 1:2.39.3-9ubuntu6.1
   ubuntu_24_04/ca-certificates: '20240203'
   ubuntu_24_04/coreutils: 9.4-3ubuntu6
@@ -15,7 +15,7 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/dpkg: 1.22.6ubuntu6.1
   ubuntu_24_04/e2fsprogs: 1.47.0-2.4~exp1ubuntu4.1
   ubuntu_24_04/findutils: 4.9.0-5build1
-  ubuntu_24_04/gcc-14-base: 14-20240412-0ubuntu1
+  ubuntu_24_04/gcc-14-base: 14.2.0-4ubuntu2~24.04
   ubuntu_24_04/gpgv: 2.4.4-2ubuntu17
   ubuntu_24_04/grep: 3.11-4build1
   ubuntu_24_04/gzip: 1.12-1ubuntu3
@@ -27,7 +27,7 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/libattr1: 1:2.5.2-1build1
   ubuntu_24_04/libaudit-common: 1:3.1.2-2.1build1
   ubuntu_24_04/libaudit1: 1:3.1.2-2.1build1
-  ubuntu_24_04/libbinutils: 2.42-4ubuntu2
+  ubuntu_24_04/libbinutils: 2.42-4ubuntu2.3
   ubuntu_24_04/libblkid1: 2.39.3-9ubuntu6.1
   ubuntu_24_04/libbz2-1.0: 1.0.8-5.1build0.1
   ubuntu_24_04/libc-bin: 2.39-0ubuntu8.3
@@ -36,19 +36,19 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/libcap2: 1:2.66-5ubuntu2
   ubuntu_24_04/libcom-err2: 1.47.0-2.4~exp1ubuntu4.1
   ubuntu_24_04/libcrypt1: 1:4.4.36-4build1
-  ubuntu_24_04/libctf-nobfd0: 2.42-4ubuntu2
-  ubuntu_24_04/libctf0: 2.42-4ubuntu2
+  ubuntu_24_04/libctf-nobfd0: 2.42-4ubuntu2.3
+  ubuntu_24_04/libctf0: 2.42-4ubuntu2.3
   ubuntu_24_04/libdb5.3t64: 5.3.28+dfsg2-7
   ubuntu_24_04/libdebconfclient0: 0.271ubuntu3
   ubuntu_24_04/libexpat1: 2.6.1-2ubuntu0.1
   ubuntu_24_04/libext2fs2t64: 1.47.0-2.4~exp1ubuntu4.1
   ubuntu_24_04/libffi8: 3.4.6-1build1
-  ubuntu_24_04/libgcc-s1: 14-20240412-0ubuntu1
+  ubuntu_24_04/libgcc-s1: 14.2.0-4ubuntu2~24.04
   ubuntu_24_04/libgcrypt20: 1.10.3-2build1
   ubuntu_24_04/libgmp10: 2:6.3.0+dfsg-2ubuntu6
   ubuntu_24_04/libgnutls30t64: 3.8.3-1.1ubuntu3.2
   ubuntu_24_04/libgpg-error0: 1.47-3build2
-  ubuntu_24_04/libgprofng0: 2.42-4ubuntu2
+  ubuntu_24_04/libgprofng0: 2.42-4ubuntu2.3
   ubuntu_24_04/libhogweed6t64: 3.9.1-2.2build1.1
   ubuntu_24_04/libidn2-0: 2.3.7-2build1
   ubuntu_24_04/libjansson4: 2.14-2build2
@@ -75,12 +75,12 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/libsemanage-common: 3.5-1build5
   ubuntu_24_04/libsemanage2: 3.5-1build5
   ubuntu_24_04/libsepol2: 3.5-2build1
-  ubuntu_24_04/libsframe1: 2.42-4ubuntu2
+  ubuntu_24_04/libsframe1: 2.42-4ubuntu2.3
   ubuntu_24_04/libsmartcols1: 2.39.3-9ubuntu6.1
   ubuntu_24_04/libsqlite3-0: 3.45.1-1ubuntu2
   ubuntu_24_04/libss2: 1.47.0-2.4~exp1ubuntu4.1
   ubuntu_24_04/libssl3t64: 3.0.13-0ubuntu3.4
-  ubuntu_24_04/libstdc++6: 14-20240412-0ubuntu1
+  ubuntu_24_04/libstdc++6: 14.2.0-4ubuntu2~24.04
   ubuntu_24_04/libsystemd0: 255.4-1ubuntu8.4
   ubuntu_24_04/libtasn1-6: 4.19.0-3build1
   ubuntu_24_04/libtinfo6: 6.4+20240113-1ubuntu2

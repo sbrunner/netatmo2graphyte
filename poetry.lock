@@ -214,13 +214,13 @@ files = [
 
 [[package]]
 name = "lnetatmo"
-version = "4.1.1"
+version = "4.1.2"
 description = "Simple API to access Netatmo weather station data from any python script."
 optional = false
 python-versions = "*"
 files = [
-    {file = "lnetatmo-4.1.1-py3-none-any.whl", hash = "sha256:e12066f6795f27ddfe00f03e90b4ad0beddbc0e2c49d28d7467a4fe222d2887a"},
-    {file = "lnetatmo-4.1.1.tar.gz", hash = "sha256:16a397f8254ff3e8e1b4846583d01266c1c8119f4053ddda133753c09a80955f"},
+    {file = "lnetatmo-4.1.2-py3-none-any.whl", hash = "sha256:e38cb7e74204808109e3873b4ee5c3addda356b96b71f0cf6c466d7f871fd667"},
+    {file = "lnetatmo-4.1.2.tar.gz", hash = "sha256:dfacc39621a837061e179be1719992db48c25a82ff5721ff58d8375142a726c6"},
 ]
 
 [[package]]
@@ -889,4 +889,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "4ccd73380e00e007a5e41eb7f69f8b7a67abe5bd66ae184c4841dd664e77dccc"
+content-hash = "62c16adc5274c60dfdabc51c97e27639bc8f7778d6159cff09e5a69c5566f604"

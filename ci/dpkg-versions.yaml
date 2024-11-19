@@ -67,8 +67,8 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/libpcre2-8-0: 10.42-4ubuntu2
   ubuntu_24_04/libproc2-0: 2:4.0.4-4ubuntu3.2
   ubuntu_24_04/libpython3-stdlib: 3.12.3-0ubuntu2
-  ubuntu_24_04/libpython3.12-minimal: 3.12.3-1ubuntu0.2
-  ubuntu_24_04/libpython3.12-stdlib: 3.12.3-1ubuntu0.2
+  ubuntu_24_04/libpython3.12-minimal: 3.12.3-1ubuntu0.3
+  ubuntu_24_04/libpython3.12-stdlib: 3.12.3-1ubuntu0.3
   ubuntu_24_04/libreadline8t64: 8.2-4build1
   ubuntu_24_04/libseccomp2: 2.5.5-1ubuntu3.1
   ubuntu_24_04/libselinux1: 3.5-2ubuntu2
@@ -110,9 +110,9 @@ sbrunner/netatmo2graphite:latest:
   ubuntu_24_04/python3-setuptools-whl: 68.1.2-2ubuntu1.1
   ubuntu_24_04/python3-venv: 3.12.3-0ubuntu2
   ubuntu_24_04/python3-wheel: 0.42.0-2
-  ubuntu_24_04/python3.12: 3.12.3-1ubuntu0.2
-  ubuntu_24_04/python3.12-minimal: 3.12.3-1ubuntu0.2
-  ubuntu_24_04/python3.12-venv: 3.12.3-1ubuntu0.2
+  ubuntu_24_04/python3.12: 3.12.3-1ubuntu0.3
+  ubuntu_24_04/python3.12-minimal: 3.12.3-1ubuntu0.3
+  ubuntu_24_04/python3.12-venv: 3.12.3-1ubuntu0.3
   ubuntu_24_04/readline-common: 8.2-4build1
   ubuntu_24_04/sed: 4.9-2build1
   ubuntu_24_04/sensible-utils: 0.0.22

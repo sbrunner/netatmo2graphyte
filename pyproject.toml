@@ -17,11 +17,11 @@ authors = []
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
-lnetatmo = "4.1.2"
+lnetatmo = "4.2.0"
 graphyte = "1.7.1"
 unidecode = "1.3.8"
 
 [tool.poetry.group.dev.dependencies]
-prospector = { extras = ["with_bandit", "with_mypy"], version = "1.12.1" }
-prospector-profile-duplicated = "1.6.0"
-setuptools="75.3.0"
+prospector = { extras = ["with_bandit", "with_mypy"], version = "1.13.3" }
+prospector-profile-duplicated = "1.8.0"
+setuptools="75.6.0"

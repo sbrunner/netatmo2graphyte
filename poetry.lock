@@ -163,13 +163,13 @@ colors = ["colorama (>=0.4.6)"]
 
 [[package]]
 name = "lnetatmo"
-version = "4.1.2"
+version = "4.2.0"
 description = "Simple API to access Netatmo weather station data from any python script."
 optional = false
 python-versions = "*"
 files = [
-    {file = "lnetatmo-4.1.2-py3-none-any.whl", hash = "sha256:e38cb7e74204808109e3873b4ee5c3addda356b96b71f0cf6c466d7f871fd667"},
-    {file = "lnetatmo-4.1.2.tar.gz", hash = "sha256:dfacc39621a837061e179be1719992db48c25a82ff5721ff58d8375142a726c6"},
+    {file = "lnetatmo-4.2.0-py3-none-any.whl", hash = "sha256:00b81a675b057ad4a4c0e5d5307471d70abc59b3145ce27531f16e6da846544d"},
+    {file = "lnetatmo-4.2.0.tar.gz", hash = "sha256:b6721ecf1cc54e1f8db3ecf309b5ac76a257a02e2176b4d75cc59cb44b0ed52d"},
 ]
 
 [[package]]
@@ -336,19 +336,18 @@ type = ["mypy (>=1.11.2)"]
 
 [[package]]
 name = "prospector"
-version = "1.12.1"
+version = "1.13.3"
 description = "Prospector is a tool to analyse Python code by aggregating the result of other tools."
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "prospector-1.12.1-py3-none-any.whl", hash = "sha256:e2440b51f40626cbaea80edd97263d8c0a71a79e729415fb505096d4d39e2287"},
-    {file = "prospector-1.12.1.tar.gz", hash = "sha256:b9bb4bcdd77b943c597ee4f374960e851cdd2a0b4b60eaeeaf0da465facafc60"},
+    {file = "prospector-1.13.3-py3-none-any.whl", hash = "sha256:e7261c222ba54bc8aef8c9e31b2dcf5ed2a656c9b76fc0cceab294cd5ec3db6b"},
+    {file = "prospector-1.13.3.tar.gz", hash = "sha256:36ccb13f69aa27c5c4682afd4cc46219b9e0c80723e30dc64ff30c71f7b877a1"},
 ]
 
 [package.dependencies]
 bandit = {version = ">=1.5.1", optional = true, markers = "extra == \"with-bandit\" or extra == \"with_everything\""}
 dodgy = ">=0.2.1,<0.3.0"
-flake8 = "*"
 GitPython = ">=3.1.27,<4.0.0"
 mccabe = ">=0.7.0,<0.8.0"
 mypy = {version = ">=0.600", optional = true, markers = "extra == \"with-mypy\" or extra == \"with_everything\""}
@@ -362,27 +361,28 @@ pylint-celery = "0.3"
 pylint-django = ">=2.6.1"
 pylint-flask = "0.6"
 PyYAML = "*"
-requirements-detector = ">=1.3.1"
+requirements-detector = ">=1.3.2"
 setoptconf-tmp = ">=0.3.1,<0.4.0"
 toml = ">=0.10.2,<0.11.0"
 
 [package.extras]
 with-bandit = ["bandit (>=1.5.1)"]
-with-everything = ["bandit (>=1.5.1)", "mypy (>=0.600)", "pyright (>=1.1.3)", "pyroma (>=2.4)", "vulture (>=1.5)"]
+with-everything = ["bandit (>=1.5.1)", "mypy (>=0.600)", "pyright (>=1.1.3)", "pyroma (>=2.4)", "ruff", "vulture (>=1.5)"]
 with-mypy = ["mypy (>=0.600)"]
 with-pyright = ["pyright (>=1.1.3)"]
 with-pyroma = ["pyroma (>=2.4)"]
+with-ruff = ["ruff"]
 with-vulture = ["vulture (>=1.5)"]
 
 [[package]]
 name = "prospector-profile-duplicated"
-version = "1.6.0"
+version = "1.8.0"
 description = "Profile that can be used to disable the duplicated or conflict rules between Prospector and other tools"
 optional = false
 python-versions = "*"
 files = [
-    {file = "prospector_profile_duplicated-1.6.0-py2.py3-none-any.whl", hash = "sha256:bf6a6aae0c7de48043b95e4d42e23ccd090c6c7115b6ee8c8ca472ffb1a2022b"},
-    {file = "prospector_profile_duplicated-1.6.0.tar.gz", hash = "sha256:9c2d541076537405e8b2484cb6222276a2df17492391b6af1b192695770aab83"},
+    {file = "prospector_profile_duplicated-1.8.0-py2.py3-none-any.whl", hash = "sha256:c36ca647848739e1ca52cf220b00ba1fbdf7105217d5534a5bf2e65279ad6011"},
+    {file = "prospector_profile_duplicated-1.8.0.tar.gz", hash = "sha256:1565109b016fac05c61dbce38b952bfce3ff054d0c5493d1acad1fc8e9909704"},
 ]
 
 [[package]]
@@ -591,20 +591,20 @@ files = [
 
 [[package]]
 name = "requirements-detector"
-version = "1.3.1"
+version = "1.3.2"
 description = "Python tool to find and list requirements of a Python project"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "requirements_detector-1.3.1-py3-none-any.whl", hash = "sha256:3ef72e1c5c3ad11100058e8f074a5762a4902985e698099d2e7f1283758d4045"},
-    {file = "requirements_detector-1.3.1.tar.gz", hash = "sha256:b89e34faf0e4d17f5736923918bd5401949cbe723294ccfefd698b3cda28e676"},
+    {file = "requirements_detector-1.3.2-py3-none-any.whl", hash = "sha256:e7595a32a21e5273dd54d3727bfef4591bbb96de341f6d95c9671981440876ee"},
+    {file = "requirements_detector-1.3.2.tar.gz", hash = "sha256:af5a3ea98ca703d14cf7b66751b2aeb3656d02d9e5fc1c97d7d4da02b057b601"},
 ]
 
 [package.dependencies]
 astroid = ">=3.0,<4.0"
 packaging = ">=21.3"
 semver = ">=3.0.0,<4.0.0"
-toml = ">=0.10.2,<0.11.0"
+toml = {version = ">=0.10.2,<0.11.0", markers = "python_version < \"3.11\""}
 
 [[package]]
 name = "rich"
@@ -652,23 +652,23 @@ yaml = ["pyyaml"]
 
 [[package]]
 name = "setuptools"
-version = "75.3.0"
+version = "75.6.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "setuptools-75.3.0-py3-none-any.whl", hash = "sha256:f2504966861356aa38616760c0f66568e535562374995367b4e69c7143cf6bcd"},
-    {file = "setuptools-75.3.0.tar.gz", hash = "sha256:fba5dd4d766e97be1b1681d98712680ae8f2f26d7881245f2ce9e40714f1a686"},
+    {file = "setuptools-75.6.0-py3-none-any.whl", hash = "sha256:ce74b49e8f7110f9bf04883b730f4765b774ef3ef28f722cce7c273d253aaf7d"},
+    {file = "setuptools-75.6.0.tar.gz", hash = "sha256:8199222558df7c86216af4f84c30e9b34a61d8ba19366cc914424cdbd28252f6"},
 ]
 
 [package.extras]
-check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1)", "ruff (>=0.5.2)"]
-core = ["importlib-metadata (>=6)", "importlib-resources (>=5.10.2)", "jaraco.collections", "jaraco.functools", "jaraco.text (>=3.7)", "more-itertools", "more-itertools (>=8.8)", "packaging", "packaging (>=24)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1)", "wheel (>=0.43.0)"]
+check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1)", "ruff (>=0.7.0)"]
+core = ["importlib_metadata (>=6)", "jaraco.collections", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more_itertools", "more_itertools (>=8.8)", "packaging", "packaging (>=24.2)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1)", "wheel (>=0.43.0)"]
 cover = ["pytest-cov"]
 doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
 enabler = ["pytest-enabler (>=2.2)"]
-test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "jaraco.test (>=5.5)", "packaging (>=23.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
-type = ["importlib-metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (==1.12.*)", "pytest-mypy"]
+test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "jaraco.test (>=5.5)", "packaging (>=24.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
+type = ["importlib_metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (>=1.12,<1.14)", "pytest-mypy"]
 
 [[package]]
 name = "smmap"
@@ -764,4 +764,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "c1918da81a5a460597cd2f9683d696700ac0906e004a1269b33dd80d9e031200"
+content-hash = "97d43816bdb44c691799c7685797a4b1920c4886b17af433a6730a210cd00484"

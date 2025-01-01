@@ -19,10 +19,10 @@ repos:
       - id: workflows-require-timeout
       - id: poetry-check
         additional_dependencies:
-          - poetry==1.8.4 # pypi
+          - poetry==1.8.5 # pypi
       - id: poetry-lock
         additional_dependencies:
-          - poetry==1.8.4 # pypi
+          - poetry==1.8.5 # pypi
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
@@ -33,7 +33,7 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@3.4.1 # npm
+          - prettier@3.4.2 # npm
           - prettier-plugin-sh@0.14.0 # npm
           - prettier-plugin-toml@2.0.1 # npm
           - '@prettier/plugin-xml@0.12.0' # npm
@@ -78,7 +78,7 @@ repos:
     hooks:
       - id: autoflake
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.0
+    rev: v3.19.1
     hooks:
       - id: pyupgrade
         args:
@@ -91,7 +91,7 @@ repos:
           - --tool=pydocstyle
           - --die-on-tool-error
         additional_dependencies:
-          - prospector-profile-duplicated==1.8.0 # pypi
+          - prospector-profile-duplicated==1.8.1 # pypi
   - repo: https://github.com/sbrunner/jsonschema-validator
     rev: 0.3.2
     hooks:

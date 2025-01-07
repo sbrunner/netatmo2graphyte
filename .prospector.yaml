@@ -1,10 +1,9 @@
 inherits:
   - duplicated
 
-strictness: veryhigh
-max-line-length: 110
-doc-warnings: true
-
+  - utils:base
+  - utils:fix
+  - utils:unsafe
 pylint:
   disable:
     - too-many-arguments
@@ -21,11 +20,7 @@ pydocstyle:
   disable:
     - D203 # 1 blank line required before class docstring (found 0)
 
-bandit:
-  run: true
-
 mypy:
-  run: true
   options:
     python-version: 3.8
     ignore-missing-imports: true
@@ -34,6 +29,3 @@ mypy:
       - unused-ignores
     check:
       - untyped-defs
-
-mccabe:
-  run: false

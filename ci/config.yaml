@@ -4,12 +4,3 @@ version:
   branch_to_version_re:
     - from: master
       to: latest
-
-publish:
-  pypi:
-    packages: []
-  docker:
-    repository:
-      github:
-        versions: []
-    dispatch: false

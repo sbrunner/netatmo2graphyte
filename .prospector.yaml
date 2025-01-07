@@ -1,31 +1,13 @@
 inherits:
   - duplicated
-
   - utils:base
   - utils:fix
   - utils:unsafe
-pylint:
-  disable:
-    - too-many-arguments
-    - too-many-branches
-    - too-many-locals
-    - too-many-statements
-    - too-many-nested-blocks
-    - too-few-public-methods
 
 pycodestyle:
   options:
     max-line-length: 110
-pydocstyle:
-  disable:
-    - D203 # 1 blank line required before class docstring (found 0)
 
 mypy:
   options:
     python-version: 3.8
-    ignore-missing-imports: true
-    warn:
-      - redundant-casts
-      - unused-ignores
-    check:
-      - untyped-defs

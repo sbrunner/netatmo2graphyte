@@ -1,39 +1,13 @@
 inherits:
   - duplicated
-
-strictness: veryhigh
-max-line-length: 110
-doc-warnings: true
-
-pylint:
-  disable:
-    - too-many-arguments
-    - too-many-branches
-    - too-many-locals
-    - too-many-statements
-    - too-many-nested-blocks
-    - too-few-public-methods
+  - utils:base
+  - utils:fix
+  - utils:unsafe
 
 pycodestyle:
   options:
     max-line-length: 110
-pydocstyle:
-  disable:
-    - D203 # 1 blank line required before class docstring (found 0)
-
-bandit:
-  run: true
 
 mypy:
-  run: true
   options:
     python-version: 3.8
-    ignore-missing-imports: true
-    warn:
-      - redundant-casts
-      - unused-ignores
-    check:
-      - untyped-defs
-
-mccabe:
-  run: false

@@ -2,6 +2,6 @@
 
 docker:
   images:
-    - name: sbrunner/netatmo2graphyte
+    - name: sbrunner/netatmo2graphite
 dispatch:
   - {}

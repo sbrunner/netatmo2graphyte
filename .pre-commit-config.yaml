@@ -19,7 +19,7 @@ repos:
       - id: workflows-require-timeout
       - id: poetry-lock
         additional_dependencies:
-          - poetry==1.8.5 # pypi
+          - poetry==2.0.1 # pypi
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
@@ -60,11 +60,11 @@ repos:
     hooks:
       - id: ripsecrets
   - repo: https://github.com/psf/black
-    rev: 24.10.0
+    rev: 25.1.0
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+    rev: 6.0.0
     hooks:
       - id: isort
   - repo: https://github.com/PyCQA/autoflake

@@ -2,8 +2,6 @@ inherits:
   - duplicated
   - utils:base
   - utils:fix
-  - utils:unsafe
-
 pycodestyle:
   options:
     max-line-length: 110

@@ -581,13 +581,13 @@ files = [
 
 [[package]]
 name = "prospector-profile-utils"
-version = "1.19.1"
+version = "1.19.3"
 description = "Some utility Prospector profiles."
 optional = false
 python-versions = "*"
 files = [
-    {file = "prospector_profile_utils-1.19.1-py2.py3-none-any.whl", hash = "sha256:aa6be6b40140b8f0057524690199d7e89713aff50cfb9f996bc0a4dd6eaf2644"},
-    {file = "prospector_profile_utils-1.19.1.tar.gz", hash = "sha256:79c9fbf587f26882149ffee79f2fb83a04c2f440608ea53388aad77e2ac5fa72"},
+    {file = "prospector_profile_utils-1.19.3-py2.py3-none-any.whl", hash = "sha256:88b9dbde644b144605339ad1158d2b87fb06b6f8fa8183fef77b80cd096b3e18"},
+    {file = "prospector_profile_utils-1.19.3.tar.gz", hash = "sha256:647c13fd0d1d8c2b823beeaa8391e98496fac61de8df9b9ce8cceec40e8d14c3"},
 ]
 
 [package.dependencies]
@@ -1131,4 +1131,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "d6c5899725c517d28c60507526f8cbc7d88c882adb8c70c8ea1782e95e2619ef"
+content-hash = "efaa20d9194158494e855438139de838cc2e3f79cba1199e3aa6542ae662af58"

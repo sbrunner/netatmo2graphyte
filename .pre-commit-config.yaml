@@ -13,13 +13,14 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
   - repo: https://github.com/sbrunner/hooks
-    rev: 1.2.1
+    rev: 1.3.0
     hooks:
       - id: copyright
       - id: workflows-require-timeout
       - id: poetry-lock
         additional_dependencies:
           - poetry==2.0.1 # pypi
+      - id: canonicalize
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
@@ -59,34 +60,24 @@ repos:
     rev: v0.1.8
     hooks:
       - id: ripsecrets
-  - repo: https://github.com/psf/black
-    rev: 25.1.0
-    hooks:
-      - id: black
-  - repo: https://github.com/PyCQA/isort
-    rev: 6.0.0
-    hooks:
-      - id: isort
-  - repo: https://github.com/PyCQA/autoflake
-    rev: v2.3.1
-    hooks:
-      - id: autoflake
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.1
-    hooks:
-      - id: pyupgrade
-        args:
-          - --py39-plus
   - repo: https://github.com/PyCQA/prospector
     rev: 1.14.0
     hooks:
       - id: prospector
         args:
-          - --tool=pydocstyle
+          - --profile=utils:pre-commit
           - --die-on-tool-error
         additional_dependencies:
           - prospector-profile-utils==1.17.0 # pypi
           - prospector-profile-duplicated==1.10.4 # pypi
+      - id: prospector
+        args:
+          - --die-on-tool-error
+          - --output-format=pylint
+          - --profile=utils:tests
+          - --profile=utils:pre-commit
+        additional_dependencies:
+          - prospector-profile-utils==1.21.2 # pypi
   - repo: https://github.com/sbrunner/jsonschema-validator
     rev: 1.0.0
     hooks:
@@ -100,3 +91,11 @@ repos:
     rev: 39.156.0
     hooks:
       - id: renovate-config-validator
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.6
+    hooks:
+      - id: ruff-format
+  - repo: https://github.com/sbrunner/python-versions-hook
+    rev: 0.8.0
+    hooks:
+      - id: python-versions

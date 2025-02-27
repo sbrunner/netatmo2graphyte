@@ -528,13 +528,13 @@ type = ["mypy (>=1.11.2)"]
 
 [[package]]
 name = "prospector"
-version = "1.15.0"
+version = "1.15.1"
 description = "Prospector is a tool to analyse Python code by aggregating the result of other tools."
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "prospector-1.15.0-py3-none-any.whl", hash = "sha256:e5c3e046fa6a28c760054676d18169dee88ba93eb877eaa88e06516409c7728f"},
-    {file = "prospector-1.15.0.tar.gz", hash = "sha256:9a6669cf5eea935bfc66eb9b1b551c0cfbd735b215415c053603b31069718d9d"},
+    {file = "prospector-1.15.1-py3-none-any.whl", hash = "sha256:967461663bc06a27e15c41a6776d53f82c9948c2f8b81e27e86a173fd8ce22e4"},
+    {file = "prospector-1.15.1.tar.gz", hash = "sha256:6b2cef836103a2179c7890e2944d874e761d9402d5079b3e7cf7271db4771c65"},
 ]
 
 [package.dependencies]
@@ -581,13 +581,13 @@ files = [
 
 [[package]]
 name = "prospector-profile-utils"
-version = "1.21.4"
+version = "1.21.6"
 description = "Some utility Prospector profiles."
 optional = false
 python-versions = "*"
 files = [
-    {file = "prospector_profile_utils-1.21.4-py2.py3-none-any.whl", hash = "sha256:fdb0edf7f61b12d1fa93b243ed04983a2e0da2feea772d2773362da602a773ea"},
-    {file = "prospector_profile_utils-1.21.4.tar.gz", hash = "sha256:dfad3177e782be134f4ef5b6cc0869a875e9016e114b2124d2f8c120caf0f933"},
+    {file = "prospector_profile_utils-1.21.6-py2.py3-none-any.whl", hash = "sha256:b0409830099802eea7a36b0bdf546c82ac855c2230a8723865b073c7d22cd562"},
+    {file = "prospector_profile_utils-1.21.6.tar.gz", hash = "sha256:8fb52eb0bac55c32ebf86a46270f63d329a8b0dcea3adb6c74980c5c29caa84a"},
 ]
 
 [package.dependencies]
@@ -942,13 +942,13 @@ yaml = ["pyyaml"]
 
 [[package]]
 name = "setuptools"
-version = "75.8.0"
+version = "75.8.2"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "setuptools-75.8.0-py3-none-any.whl", hash = "sha256:e3982f444617239225d675215d51f6ba05f845d4eec313da4418fdbb56fb27e3"},
-    {file = "setuptools-75.8.0.tar.gz", hash = "sha256:c5afc8f407c626b8313a86e10311dd3f661c6cd9c09d4bf8c15c0e11f9f2b0e6"},
+    {file = "setuptools-75.8.2-py3-none-any.whl", hash = "sha256:558e47c15f1811c1fa7adbd0096669bf76c1d3f433f58324df69f3f5ecac4e8f"},
+    {file = "setuptools-75.8.2.tar.gz", hash = "sha256:4880473a969e5f23f2a2be3646b2dfd84af9028716d398e46192f84bc36900d2"},
 ]
 
 [package.extras]
@@ -1131,4 +1131,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "097c189f4aa83fd2d4be50e5699ecf288b1463c21cff288493ef4529e668eb66"
+content-hash = "506feb2e94c0a53860fd75f23467922231b01453ab8b6548e7633265dd953eed"

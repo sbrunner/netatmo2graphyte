@@ -9,6 +9,7 @@ import os
 import shutil
 import sys
 import time
+from pathlib import Path
 
 import graphyte
 import lnetatmo
@@ -17,11 +18,11 @@ import unidecode
 LOG = logging.getLogger("netatmo2graphite")
 
 
-class TooManyRequests(Exception):
+class TooManyError(Exception):
     """Too many requests."""
 
 
-def normalize(name):
+def normalize(name: str) -> str:
     """Normalize a name for Graphyte."""
     name = name.replace(" ", "_")
     name = name.replace("(", "_")
@@ -31,7 +32,7 @@ def normalize(name):
     return unidecode.unidecode(name).lower()
 
 
-def process(state, authorization):
+def process(state: dict[str, int], authorization: lnetatmo.ClientAuth) -> None:
     """Get the new data on Netatmo website and set the the Graphyte."""
     delta = int(os.environ.get("DAEMON_PROCESS_END_SECONDS", "86400"))
     graphyte.send("run", 1)
@@ -39,7 +40,7 @@ def process(state, authorization):
     try:
         weather_data = lnetatmo.WeatherStationData(authorization)
     except TypeError as error:
-        raise TooManyRequests() from error
+        raise TooManyError from error
 
     for station in weather_data.stations.values():
         station_name = station["home_name"]
@@ -56,7 +57,7 @@ def process(state, authorization):
             ]:
                 if data_type in module:
                     key = (
-                        f'status.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                        f"status.{normalize(station_name)}.{normalize(module['module_name'])}."
                         f"{normalize(data_type)}"
                     )
                     LOG.debug("Key: %s = %s", key, module[data_type])
@@ -71,7 +72,7 @@ def process(state, authorization):
             ]:
                 if data_type in module:
                     key = (
-                        f'dates.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                        f"dates.{normalize(station_name)}.{normalize(module['module_name'])}."
                         f"{normalize(data_type)}"
                     )
                     LOG.debug("Key: %s = %s", key, module[data_type])
@@ -81,7 +82,7 @@ def process(state, authorization):
             ]:
                 if data_type in module:
                     key = (
-                        f'other.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                        f"other.{normalize(station_name)}.{normalize(module['module_name'])}."
                         f"{normalize(data_type)}"
                     )
                     LOG.debug("Key: %s = %s", key, module[data_type])
@@ -89,15 +90,15 @@ def process(state, authorization):
 
             if "place" in module:
                 key = (
-                    f'other.{normalize(station_name)}.{normalize(module["module_name"])}.'
-                    f'{normalize("altitude")}'
+                    f"other.{normalize(station_name)}.{normalize(module['module_name'])}."
+                    f"{normalize('altitude')}"
                 )
                 LOG.debug("Key: %s = %s", key, module["place"]["altitude"])
                 graphyte.send(key, module["place"]["altitude"])
 
             for data_type in module["data_type"]:
                 key = (
-                    f'data.{normalize(station_name)}.{normalize(module["module_name"])}.'
+                    f"data.{normalize(station_name)}.{normalize(module['module_name'])}."
                     f"{normalize(data_type)}"
                 )
                 LOG.info("Key %s", key)
@@ -110,7 +111,8 @@ def process(state, authorization):
                             state.get(
                                 key,
                                 float(os.environ.get("DAEMON_DEFAULT_TIMESTAMP", "0")),
-                            )
+                            ),
+                            tz=datetime.timezone.utc,
                         ),
                     )
                     measures = weather_data.getMeasure(
@@ -118,9 +120,7 @@ def process(state, authorization):
                         scale="max",  # max
                         mtype=data_type,
                         module_id=module["_id"],
-                        date_begin=state.get(
-                            key, float(os.environ.get("DAEMON_DEFAULT_TIMESTAMP", "0"))
-                        ),
+                        date_begin=state.get(key, float(os.environ.get("DAEMON_DEFAULT_TIMESTAMP", "0"))),
                     )
                     if measures is None:
                         # Netatmo error
@@ -136,25 +136,18 @@ def process(state, authorization):
                     for time_str, values in measures["body"].items():
                         time_int = int(time_str)
                         if key in state and state[key] < time_int - int(
-                            os.environ.get(
-                                "DAEMON_PROCESS_MAX_MISSING_SECONDS", str(86400 * 7)
-                            )
+                            os.environ.get("DAEMON_PROCESS_MAX_MISSING_SECONDS", str(86400 * 7)),
                         ):
                             LOG.info(
                                 "Ignore from date: %r, current: %r, diff: %f",
-                                datetime.datetime.fromtimestamp(time_int),
-                                datetime.datetime.fromtimestamp(state[key]),
+                                datetime.datetime.fromtimestamp(time_int, tz=datetime.timezone.utc),
+                                datetime.datetime.fromtimestamp(state[key], tz=datetime.timezone.utc),
                                 time_int - state[key],
                             )
-                            state[key] += int(
-                                os.environ.get(
-                                    "DAEMON_PROCESS_ADD_ON_IGNORE_SECONDS", "3600"
-                                )
-                            )
+                            state[key] += int(os.environ.get("DAEMON_PROCESS_ADD_ON_IGNORE_SECONDS", "3600"))
                             break_ = True
                             break
                         for value in values:
-                            # LOG.debug("%r: %s", datetime.datetime.fromtimestamp(time_int), value)
                             if value is not None:
                                 graphyte.send(
                                     key,
@@ -166,26 +159,21 @@ def process(state, authorization):
                     LOG.debug(
                         "Save state %s: %r",
                         key,
-                        datetime.datetime.fromtimestamp(time_int),
+                        datetime.datetime.fromtimestamp(time_int, tz=datetime.timezone.utc),
                     )
 
-                    with open(
-                        "/etc/netatmo2graphite/state.json_", "w", encoding="utf-8"
-                    ) as config_file:
+                    state_path = Path("/etc/netatmo2graphite/state.json")
+                    state_back_path = Path("/etc/netatmo2graphite/state.json.bak")
+                    state_tmp_path = Path("/etc/netatmo2graphite/state.json_")
+                    with state_tmp_path.open("w", encoding="utf-8") as config_file:
                         config_file.write(json.dumps(state))
-                    shutil.move(
-                        "/etc/netatmo2graphite/state.json",
-                        "/etc/netatmo2graphite/state.json.bak",
-                    )
-                    shutil.move(
-                        "/etc/netatmo2graphite/state.json_",
-                        "/etc/netatmo2graphite/state.json",
-                    )
+                    shutil.move(str(state_path), str(state_back_path))
+                    shutil.move(str(state_tmp_path), str(state_path))
                     if break_ or state.get(key, 0) > time.time() - delta:
                         break
 
 
-def main():
+def main() -> None:
     """Run the daemon."""
     logging.basicConfig(level=os.environ.get("LOGLEVEL", logging.INFO))
 
@@ -200,13 +188,14 @@ def main():
         sys.exit(1)
 
     state = {}
-    if os.path.exists("/etc/netatmo2graphite/state.json"):
-        with open("/etc/netatmo2graphite/state.json", encoding="utf-8") as config_file:
+    state_path = Path("/etc/netatmo2graphite/state.json")
+    if state_path.exists():
+        with state_path.open(encoding="utf-8") as config_file:
             data = config_file.read()
             try:
                 state = json.loads(data)
             except json.decoder.JSONDecodeError:
-                LOG.error("Wrong state: %s", data)
+                LOG.exception("Wrong state: %s", data)
 
     delay = int(os.environ.get("DAEMON_DELAY_SECONDS", "300"))
     if delay > 0:
@@ -214,13 +203,13 @@ def main():
             time.sleep(delay)
             try:
                 process(state, authorization)
-            except TooManyRequests:
-                LOG.error("Too many requests, will continue...")
+            except TooManyError:
+                LOG.error("Too many requests, will continue...")  # noqa: TRY400
     else:
         try:
             process(state, authorization)
-        except TooManyRequests:
-            LOG.error("Too many requests")
+        except TooManyError:
+            LOG.error("Too many requests")  # noqa: TRY400
 
 
 if __name__ == "__main__":

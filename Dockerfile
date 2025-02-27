@@ -19,7 +19,7 @@ RUN --mount=type=cache,target=/root/.cache \
     python3 -m pip install --disable-pip-version-check --requirement=/tmp/requirements.txt
 
 # Used to convert the locked packages by poetry to pip requirements format
-FROM base as poetry
+FROM base AS poetry
 
 # Install Poetry
 WORKDIR /tmp
@@ -50,7 +50,7 @@ RUN --mount=type=cache,target=/root/.cache \
 
 RUN python3 -m compileall -q /venv/lib/python3.* && pip freeze --all > /requirements.txt
 
-COPY netatmo2graphite /usr/bin/
+COPY netatmo2graphite.py /usr/bin/netatmo2graphite
 CMD ["netatmo2graphite"]
 
 RUN echo '{}' > ~/.netatmo.credentials

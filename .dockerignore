@@ -2,4 +2,4 @@
 !requirements.txt
 !pyproject.toml
 !poetry.lock
-!netatmo2graphite
+!netatmo2graphite.py

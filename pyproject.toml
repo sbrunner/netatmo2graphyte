@@ -1,8 +1,18 @@
+[tool.ruff]
+target-version = "py310"
+line-length = 110
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
 [tool.poetry]
-name = 'shifter-jupyterlab'
+name = 'netatmo2graphite'
 version = '0.0.0'
 description = 'Not used'
 authors = []
+
+[tool.poetry.scripts]
+netatmo2graphite = 'netatmo2graphite.py:main'
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
@@ -15,10 +25,3 @@ prospector = { version = "1.15.0", extras = ["with_bandit", "with_mypy", "with_p
 prospector-profile-utils = "1.21.4"
 prospector-profile-duplicated = "1.10.4"
 setuptools="75.8.0"
-
-[tool.ruff]
-target-version = "py310"
-line-length = 110
-
-[tool.ruff.lint.pydocstyle]
-convention = "numpy"

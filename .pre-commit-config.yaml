@@ -19,7 +19,7 @@ repos:
       - id: workflows-require-timeout
       - id: poetry-lock
         additional_dependencies:
-          - poetry==2.0.1 # pypi
+          - poetry==2.1.1 # pypi
       - id: canonicalize
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
@@ -31,8 +31,8 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@3.4.2 # npm
-          - prettier-plugin-sh@0.14.0 # npm
+          - prettier@3.5.2 # npm
+          - prettier-plugin-sh@0.15.0 # npm
           - prettier-plugin-toml@2.0.2 # npm
           - '@prettier/plugin-xml@0.12.0' # npm
   - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -61,7 +61,7 @@ repos:
     hooks:
       - id: ripsecrets
   - repo: https://github.com/PyCQA/prospector
-    rev: v1.14.1
+    rev: v1.15.2
     hooks:
       - id: prospector
         args:
@@ -90,7 +90,7 @@ repos:
             |\.github/publish\.yaml
           )$
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 39.156.2
+    rev: 39.182.3
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/astral-sh/ruff-pre-commit
